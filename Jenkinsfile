@@ -24,7 +24,7 @@ tools {
 
         stage('Docker Build') {
             steps {
-                bat 'docker build -t learning-track .'
+                bat 'docker build -t working_track .'
             }
         }
 
