@@ -1,21 +1,40 @@
+<<<<<<< HEAD
 
 services:
   mysql:
     image: mysql:8.0
     container_name: task_track-mysql
+=======
+version: "3.8"
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: workingtrack-mysql
+
+>>>>>>> 1cea0b14c7129bd434ff4fef3af83baf955130fb
     restart: always
 
     environment:
       MYSQL_ROOT_PASSWORD: root
+<<<<<<< HEAD
       MYSQL_DATABASE: task_track
 
     ports:
       - "3306:3306"
+=======
+      MYSQL_DATABASE: working_track
+
+    ports:
+      - "3307:3306"
+>>>>>>> 1cea0b14c7129bd434ff4fef3af83baf955130fb
 
     volumes:
       - mysql_data:/var/lib/mysql
 
     healthcheck:
+<<<<<<< HEAD
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
       interval: 10s
       timeout: 5s
@@ -27,10 +46,24 @@ services:
     build: ./task-track
     container_name: task_track-app
     restart: on-failure
+=======
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 10
+      timeout: 5s
+
+  working_track:
+
+    build: .
+
+    container_name: workingtrack-app
+
+>>>>>>> 1cea0b14c7129bd434ff4fef3af83baf955130fb
     depends_on:
       mysql:
         condition: service_healthy
 
+<<<<<<< HEAD
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/task_track
       SPRING_DATASOURCE_USERNAME: root
@@ -50,6 +83,15 @@ services:
     ports:
       - "4200:80"
 
+=======
+    ports:
+      - "8080:8080"
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/working_track
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+>>>>>>> 1cea0b14c7129bd434ff4fef3af83baf955130fb
 
 volumes:
   mysql_data:

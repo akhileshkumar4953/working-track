@@ -2,6 +2,7 @@ pipeline {
 
     agent any
 
+<<<<<<< HEAD
     tools {
         jdk 'JDK21'
         maven 'Maven3.9'
@@ -199,11 +200,40 @@ pipeline {
                 '''
             }
         }
+=======
+tools {
+    maven 'Maven3.9'
+    jdk 'JDK21'
+}
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    url: 'https://github.com/akhileshkumar4953/working-track.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'mvn clean package -DskipTests'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                bat 'docker build -t working_track .'
+            }
+        }
+
+>>>>>>> 1cea0b14c7129bd434ff4fef3af83baf955130fb
     }
 
     post {
 
         success {
+<<<<<<< HEAD
             echo '========================================'
             echo 'APPLICATION SUCCESSFULLY DEPLOYED'
             echo '========================================'
@@ -221,4 +251,15 @@ pipeline {
             echo '========================================'
         }
     }
+=======
+            echo 'Build Successful'
+        }
+
+        failure {
+            echo 'Build Failed'
+        }
+
+    }
+
+>>>>>>> 1cea0b14c7129bd434ff4fef3af83baf955130fb
 }
